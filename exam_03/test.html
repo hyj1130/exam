@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <script src="frameworks/jquery-2.1.4/jquery.min.js"></script>
+    <script src="frameworks/angular-1.4.0/angular.min.js"></script>
+    <script src="frameworks/angular-1.4.0/angular-route.min.js"></script>
+    <script>
+        angular.module("app",['ng']).controller("oneCtrl",function ($scope) {
+            $scope.arr=[{
+                id:1,
+                name:"简单"
+            },{
+                id:2,
+                name:"中等"
+            },{
+                id:3,
+                name:"困难"
+            }];
+            $scope.level=1;
+            $scope.level2=$scope.arr[0];
+            $scope.level3=1;
+
+        });
+    </script>
+</head>
+<body ng-controller="oneCtrl">
+    <select ng-model="level">
+        <option value="{{level.id}}" ng-repeat="level in arr">
+            {{level.name}}
+        </option>
+    </select>
+    level:{{level}}
+    <br>
+    <!--绑定数组中一个对象-->
+                                              <!--for之前：作为option的标签，相当于option中间显示的什么内容-->
+    <select ng-model="level2" ng-options="level.name for level in arr"></select>
+    level2:{{level2}}
+    <br>
+    <!--绑定数组中一个对象的一个属性-->
+                                              <!--as之前：作为option的属性，只用选到level的id而不是整个level的数组-->
+    <select ng-model="level3" ng-options="level.id as level.name for level in arr"></select>
+    level3:{{level3}}
+
+</body>
+</html>
